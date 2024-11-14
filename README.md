@@ -18,14 +18,15 @@ The project consists of the following components:
 * NumPy for numerical computing
 * Scikit-learn for machine learning
 * Flask for web application development
-* HTML, CSS, and JavaScript for web interface development
+* Flutter for mobile app interface
+  
 
 ## How to Use
 
 1. Install the required packages by running `pip install -r requirements.txt`.
 2. Train the model by running `python train_model.py`.
-3. Start the web application by running `python app.py`.
-4. Open a web browser and navigate to `http://localhost:5000` to use the application.
+3. Start the server by running `python app.py`.
+4. Open a web browser and navigate to `http://localhost:5000` to interact with the api.
 
 ## Future Work
 
