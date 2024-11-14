@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Adaptability Prediction</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow">
+        <h1 class="text-2xl font-bold mb-6">Student Adaptability Prediction</h1>
+        
+        <form id="predictionForm" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium">Gender</label>
+                    <select name="Gender" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="Boy">Boy</option>
+                        <option value="Girl">Girl</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium">Age</label>
+                    <select name="Age" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="1-5">1-5</option>
+                        <option value="6-10">6-10</option>
+                        <option value="11-15">11-15</option>
+                        <option value="16-20">16-20</option>
+                        <option value="21-25">21-25</option>
+                        <option value="26-30">26-30</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">Education Level</label>
+                    <select name="Education Level" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="School">School</option>
+                        <option value="College">College</option>
+                        <option value="University">University</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">Institution Type</label>
+                    <select name="Institution Type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="Government">Government</option>
+                        <option value="Non Government">Non Government</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">IT Student</label>
+                    <select name="IT Student" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">Location</label>
+                    <select name="Location" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">Load-shedding</label>
+                    <select name="Load-shedding" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="Low">Low</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">Financial Condition</label>
+                    <select name="Financial Condition" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="Poor">Poor</option>
+                        <option value="Mid">Mid</option>
+                        <option value="Rich">Rich</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">Internet Type</label>
+                    <select name="Internet Type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="Wifi">Wifi</option>
+                        <option value="Mobile Data">Mobile Data</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">Network Type</label>
+                    <select name="Network Type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="4G">4G</option>
+                        <option value="3G">3G</option>
+                        <option value="2G">2G</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">Class Duration</label>
+                    <select name="Class Duration" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="0">0</option>
+                        <option value="1-3">1-3</option>
+                        <option value="3-6">3-6</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">Self Lms</label>
+                    <select name="Self Lms" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">Device</label>
+                    <select name="Device" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="Mobile">Mobile</option>
+                        <option value="Computer">Computer</option>
+                        <option value="Tab">Tab</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+                Predict Adaptability
+            </button>
+        </form>
+
+        <div id="result" class="mt-6 p-4 hidden">
+            <h2 class="text-xl font-semibold">Prediction Result:</h2>
+            <p id="predictionResult" class="mt-2 text-lg"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            const resultDiv = document.getElementById('result');
+            const predictionResult = document.getElementById('predictionResult');
+            
+            resultDiv.classList.remove('hidden');
+            predictionResult.textContent = `The student's predicted adaptability level is: ${result.prediction}`;
+            
+            // Add color based on prediction
+            predictionResult.className = 'mt-2 text-lg font-bold ' + 
+                (result.prediction === 'High' ? 'text-green-600' :
+                 result.prediction === 'Moderate' ? 'text-blue-600' :
+                 'text-red-600');
+        });
+    </script>
+</body>
+</html>
