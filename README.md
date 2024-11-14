@@ -10,7 +10,6 @@ The project consists of the following components:
 2. **Model Training**: The `train_model.py` script is responsible for training and evaluating different machine learning models on the dataset. The best-performing model is saved along with its scaler for future predictions.
 3. **Prediction**: The `predict.py` script contains functions for making predictions on new, unseen data. It loads the trained model and scaler, preprocesses the input data, and makes predictions.
 4. **Mobile Application**: The project also includes a Flutter mobile application that allows users to input student information and receive predictions on their adaptability level.
-5. **Templates**: The `templates` directory contains HTML templates for the web application, including the user interface for inputting student information and displaying predictions.
 
 ## Technologies Used
 
